@@ -6,6 +6,8 @@ use namespace::autoclean;
 use Method::Signatures::Simple;
 use MooseX::Params::Validate qw( validated_hash pos_validated_list );
 
+use Fey::Types qw( SelectElement );
+
 has '_return' => (
     traits   => [ 'Array' ],
     is       => 'bare',
@@ -22,7 +24,7 @@ method returning {
     my $count = @_ ? @_ : 1;
     my (@returning) = pos_validated_list(
         \@_,
-        ( ( { isa => 'Fey::Types::SelectElement' } ) x $count ),
+        ( ( { isa => SelectElement } ) x $count ),
         MX_PARAMS_VALIDATE_NO_CACHE => 1,
     );
 
